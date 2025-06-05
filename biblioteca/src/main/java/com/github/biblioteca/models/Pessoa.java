@@ -1,6 +1,7 @@
 package com.github.biblioteca.models;
 
-public abstract class Pessoa {
+
+public abstract class Pessoa implements Gerenciavel {
     protected String nome;
     protected String cpf;
     protected int idade;
@@ -11,24 +12,17 @@ public abstract class Pessoa {
         this.idade = idade;
     }
 
-    public String getNome() {
-        return nome;
-    }
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-    public String getCpf() {
-        return cpf;
-    }
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-    public int getIdade() {
-        return idade;
-    }
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
+    // Getters e Setters
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
 
+    public String getCpf() { return cpf; }
+    public void setCpf(String cpf) { this.cpf = cpf; }
+
+    public int getIdade() { return idade; }
+    public void setIdade(int idade) { this.idade = idade; }
+
+    // Método da interface (abstrato)
+    @Override
     public abstract void exibirInformacoes();
-}
+}   
