@@ -1,4 +1,4 @@
-package biblioteca.src.main.java.com.github.biblioteca.modelos;
+package com.github.biblioteca.models;
 
 public abstract class Pessoa {
     protected String nome;

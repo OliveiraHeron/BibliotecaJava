@@ -1,15 +1,20 @@
-package biblioteca.src.main.java.com.github.biblioteca;
-
-import biblioteca.src.main.java.com.github.biblioteca.controladores.LivroController;
-import biblioteca.src.main.java.com.github.biblioteca.controladores.UsuarioController;
+package com.github.biblioteca;
 
 import java.util.Scanner;
 
+import com.github.biblioteca.controllers.LivroController;
+import com.github.biblioteca.controllers.UsuarioController;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Main {
+    private static final Logger logger = LogManager.getLogger(Main.class);
     public static void main(String[] args) {
         UsuarioController usuarioCtrl = new UsuarioController();
         LivroController livroCtrl = new LivroController();
         Scanner scanner = new Scanner(System.in);
+
+        logger.info("Iniciando o sistema de biblioteca...");
 
         while (true) {
             System.out.println("\n------ MENU PRINCIPAL------");
@@ -28,10 +33,12 @@ public class Main {
                 case 4 -> livroCtrl.listarLivros();
                 case 0 -> {
                     System.out.println("Encerrando programa...");
+                    scanner.close();
+                    logger.info("Sistema de biblioteca encerrado.");
                     return;
                 }
                 default -> System.out.println("--ERRO--: Opção invalida");
             }
-        }
+        }        
     }
 }

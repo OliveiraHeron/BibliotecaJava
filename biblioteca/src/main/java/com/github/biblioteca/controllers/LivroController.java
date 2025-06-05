@@ -1,15 +1,19 @@
-package biblioteca.src.main.java.com.github.biblioteca.controladores;
-import biblioteca.src.main.java.com.github.biblioteca.modelos.Livro;
+package com.github.biblioteca.controllers;
+import com.github.biblioteca.models.Livro;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class LivroController {
+    private static final Logger logger = LogManager.getLogger(LivroController.class);
     private List<Livro> livros = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
 
     public void adicionarLivro() {
+        logger.info("Adicionando um novo livro...");
         System.out.print("Titulo do livro: ");
         String titulo = scanner.nextLine();
         System.out.print("Autor do livro: ");
@@ -23,17 +27,20 @@ public class LivroController {
     }
 
     public void listarLivros() {
+        logger.info("Listando livros disponiveis...");
         for (Livro l : livros) {
             System.out.println("Titulo: " + l.getTitulo() + ", Autor: " + l.getAutor() + ", Id: " + l.getId());
         }
     }
 
     public void removerLivro(String isbn) {
+        logger.info("Removendo livro");
         livros.removeIf(l -> l.getId().equals(isbn));
         System.out.println("Livro removido");
     }
 
     public void editarLivro(String isbn) {
+        logger.info("Editando dados do livro");
         for (Livro l : livros) {
             if (l.getId().equals(isbn)) {
                 System.out.print("Novo titulo: ");
