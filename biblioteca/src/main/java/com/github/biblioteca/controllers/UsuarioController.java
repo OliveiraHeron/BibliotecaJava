@@ -21,6 +21,8 @@ public class UsuarioController {
     private String fileName = "usuarios.txt";
 
     public void adicionarUsuario() {
+        logger.info("Iniciando a adição de um novo usuário\n");
+
         System.out.print("Nome: ");
         String nome = scanner.nextLine();
         System.out.print("CPF: ");
@@ -38,6 +40,8 @@ public class UsuarioController {
     }
 
     public void listarUsuarios() {
+        logger.info("Iniciando a listagem de usuários\n");
+
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String linha;
             boolean encontrou = false;
@@ -62,6 +66,8 @@ public class UsuarioController {
     }
 
     public void removerUsuario(String cpf) {
+        logger.info("Iniciando a remoção de um usuário\n");
+
         List<String> linhasRestantes = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String linha;
@@ -87,6 +93,8 @@ public class UsuarioController {
     }
 
     public void editarUsuario(String cpf) {
+        logger.info("Iniciando a edição de um usuário\n");
+
         boolean atualizado = false;
         List<String> linhasAtualizadas = new ArrayList<>();
 

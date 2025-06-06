@@ -21,6 +21,8 @@ public class LivroController {
     private String fileName = "livros.txt";
 
     public void adicionarLivro() {
+        logger.info("Iniciando a adição de um novo livro\n");
+
         System.out.print("Título: ");
         String titulo = scanner.nextLine();
         System.out.print("Autor: ");
@@ -35,6 +37,8 @@ public class LivroController {
     }
 
     public void listarLivros() {
+        logger.info("Iniciando a listagem de livros\n");
+
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String linha;
             boolean encontrou = false;
@@ -58,6 +62,8 @@ public class LivroController {
     }
 
     public void removerLivro(String isbn) {
+        logger.info("Iniciando a remoção de um livro\n");
+
         List<String> linhasRestantes = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String linha;
@@ -83,6 +89,8 @@ public class LivroController {
     }
 
     public void editarLivro(String isbn) {
+        logger.info("Iniciando a edição de um livro\n");
+
         boolean atualizado = false;
         List<String> linhasAtualizadas = new ArrayList<>();
 
