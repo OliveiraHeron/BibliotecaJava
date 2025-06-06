@@ -62,7 +62,27 @@ public class UsuarioController {
     }
 
     public void removerUsuario(String cpf) {
-        usuarios.removeIf(u -> u.getCpf().equals(cpf));
+        List<String> linhasRestantes = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                String[] dados = linha.split(",");
+                if (dados.length == 4 && !dados[1].equals(cpf)) {
+                    linhasRestantes.add(linha);
+                }
+            }
+        } catch (IOException e) {
+            logger.error("Erro ao ler o arquivo: " + e.getMessage());
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, false))) {
+            for (String l : linhasRestantes) {
+                writer.write(l);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            logger.error("Erro ao escrever no arquivo: " + e.getMessage());
+        }
         System.out.println("Usuário removido!");
     }
 

@@ -58,7 +58,27 @@ public class LivroController {
     }
 
     public void removerLivro(String isbn) {
-        livros.removeIf(l -> l.getIsbn().equals(isbn));
+        List<String> linhasRestantes = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                String[] dados = linha.split(",");
+                if (dados.length == 3 && !dados[2].equals(isbn)) {
+                    linhasRestantes.add(linha);
+                }
+            }
+        } catch (IOException e) {
+            logger.error("Erro ao ler o arquivo: " + e.getMessage());
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, false))) {
+            for (String l : linhasRestantes) {
+                writer.write(l);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            logger.error("Erro ao escrever no arquivo: " + e.getMessage());
+        }
         System.out.println("Livro removido!");
     }
 

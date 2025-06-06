@@ -39,6 +39,7 @@ public class LivroView {
                     break;
                 case 4:
                     System.out.println("Digite o ISBN do livro a ser excluído:");
+                    scanner.nextLine();
                     ISBN = scanner.nextLine();
                     livroController.removerLivro(ISBN);
                     break;
