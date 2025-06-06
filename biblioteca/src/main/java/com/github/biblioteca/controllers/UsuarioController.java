@@ -145,4 +145,8 @@ public class UsuarioController {
             logger.error("Erro ao salvar livro: " + e.getMessage());
         }
     }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
 }

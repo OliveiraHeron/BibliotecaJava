@@ -141,4 +141,9 @@ public class LivroController {
             logger.error("Erro ao salvar livro: " + e.getMessage());
         }
     }
+
+    public List<Livro> getLivros() {
+        return livros;
+    }
+
 }
