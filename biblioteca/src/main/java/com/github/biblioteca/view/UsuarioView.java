@@ -10,8 +10,8 @@ import org.apache.logging.log4j.Logger;
 
 public class UsuarioView implements Menu {
     private static final Logger logger = LogManager.getLogger(UsuarioView.class);
-    private static Scanner scanner = new Scanner(System.in);
-    private static UsuarioController usuarioController = new UsuarioController();
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final UsuarioController usuarioController = new UsuarioController();
 
     @Override
     public void exibirMenu() {
@@ -25,6 +25,7 @@ public class UsuarioView implements Menu {
             System.out.println("0. Voltar ao Menu Principal");
             System.out.print("Opcao: ");
             int op = scanner.nextInt();
+            scanner.nextLine(); // limpar buffer
 
             switch (op) {
                 case 1:
@@ -34,22 +35,26 @@ public class UsuarioView implements Menu {
                     usuarioController.listarUsuarios();
                     break;
                 case 3:
-                    System.out.println("Digite o CPF do usuário a ser editado:");
-                    String cpfEditar = scanner.next();
+                    System.out.print("Digite o CPF do usuario a ser editado: ");
+                    String cpfEditar = scanner.nextLine();
                     usuarioController.editarUsuario(cpfEditar);
                     break;
                 case 4:
-                    System.out.println("Digite o CPF do usuário a ser excluído:");
-                    String cpfExcluir = scanner.next();
+                    System.out.print("Digite o CPF do usuario a ser excluido: ");
+                    String cpfExcluir = scanner.nextLine();
                     usuarioController.removerUsuario(cpfExcluir);
                     break;
                 case 0:
                     logger.info("Voltando ao menu principal.");
                     return;
                 default:
-                    System.out.println("--ERRO--: Opção inválida");
+                    System.out.println("--ERRO--: Opcao invalida");
                     break;
             }
         }
+    }
+
+    public static UsuarioController getController() {
+        return usuarioController;
     }
 }
