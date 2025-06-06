@@ -87,19 +87,44 @@ public class UsuarioController {
     }
 
     public void editarUsuario(String cpf) {
-        for (Usuario u : usuarios) {
-            if (u.getCpf().equals(cpf)) {
-                System.out.print("Novo nome: ");
-                u.setNome(scanner.nextLine());
-                System.out.print("Nova idade: ");
-                u.setIdade(Integer.parseInt(scanner.nextLine()));
-                System.out.print("Nova matrícula: ");
-                u.setMatricula(scanner.nextLine());
-                System.out.println("Usuário atualizado!");
-                return;
+        boolean atualizado = false;
+        List<String> linhasAtualizadas = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                String[] dados = linha.split(",");
+                if (dados.length == 4 && dados[1].equals(cpf)) {
+                    System.out.print("Novo nome: ");
+                    String novoNome = scanner.nextLine();
+                    System.out.print("Nova idade: ");
+                    String novoIdade = scanner.nextLine();
+                    linhasAtualizadas.add(novoNome + "," + cpf + "," + novoIdade + "," + dados[3]);
+                    atualizado = true;
+                } else {
+                    linhasAtualizadas.add(linha);
+                }
             }
+        } catch (IOException e) {
+            logger.error("Erro ao ler o arquivo: " + e.getMessage());
+            return;
         }
-        System.out.println("Usuário não encontrado.");
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, false))) {
+            for (String l : linhasAtualizadas) {
+                writer.write(l);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            logger.error("Erro ao escrever no arquivo: " + e.getMessage());
+            return;
+        }
+
+        if (atualizado) {
+            System.out.println("Usuário atualizado!");
+        } else {
+            System.out.println("Usuário não encontrado.");
+        }
     }
 
     private void salvarEmArquivo(Usuario usuario) {

@@ -83,17 +83,44 @@ public class LivroController {
     }
 
     public void editarLivro(String isbn) {
-        for (Livro l : livros) {
-            if (l.getIsbn().equals(isbn)) {
-                System.out.print("Novo título: ");
-                l.setTitulo(scanner.nextLine());
-                System.out.print("Novo autor: ");
-                l.setAutor(scanner.nextLine());
-                System.out.println("Livro atualizado!");
-                return;
+        boolean atualizado = false;
+        List<String> linhasAtualizadas = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                String[] dados = linha.split(",");
+                if (dados.length == 3 && dados[2].equals(isbn)) {
+                    System.out.print("Novo título: ");
+                    String novoTitulo = scanner.nextLine();
+                    System.out.print("Novo autor: ");
+                    String novoAutor = scanner.nextLine();
+                    linhasAtualizadas.add(novoTitulo + "," + novoAutor + "," + isbn);
+                    atualizado = true;
+                } else {
+                    linhasAtualizadas.add(linha);
+                }
             }
+        } catch (IOException e) {
+            logger.error("Erro ao ler o arquivo: " + e.getMessage());
+            return;
         }
-        System.out.println("Livro não encontrado.");
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, false))) {
+            for (String l : linhasAtualizadas) {
+                writer.write(l);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            logger.error("Erro ao escrever no arquivo: " + e.getMessage());
+            return;
+        }
+
+        if (atualizado) {
+            System.out.println("Livro atualizado!");
+        } else {
+            System.out.println("Livro não encontrado.");
+        }
     }
 
     private void salvarEmArquivo(Livro livro) {

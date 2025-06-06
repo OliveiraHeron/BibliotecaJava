@@ -34,6 +34,7 @@ public class LivroView {
                     break;
                 case 3:
                     System.out.println("Digite o ISBN do livro a ser editado:");
+                    scanner.nextLine();
                     ISBN = scanner.nextLine();
                     livroController.editarLivro(ISBN);
                     break;
