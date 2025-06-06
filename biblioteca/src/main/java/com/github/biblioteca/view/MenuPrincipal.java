@@ -21,6 +21,7 @@ public class MenuPrincipal {
 
             switch (op) {
                 case 1 -> UsuarioView.menuUsuario();
+                case 2 -> LivroView.MenuLivro();
                 case 0 -> {
                     System.out.println("Encerrando programa...");
                     scanner.close();
