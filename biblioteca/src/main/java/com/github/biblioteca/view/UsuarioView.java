@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 public class UsuarioView {
     private static final Logger logger = LogManager.getLogger(UsuarioView.class);
     private static Scanner scanner = new Scanner(System.in);
-    private static UsuarioController usuarioController;
+    private static UsuarioController usuarioController = new UsuarioController();
 
     public static void menuUsuario() {
         logger.info("Menu do usuário iniciado.");
