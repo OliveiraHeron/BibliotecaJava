@@ -10,7 +10,7 @@ import com.github.biblioteca.controllers.LivroController;
 public class LivroView {
     private static final Logger logger = LogManager.getLogger(UsuarioView.class);
     private static Scanner scanner = new Scanner(System.in);
-    private static LivroController livroController;
+    private static LivroController livroController = new LivroController();
     private static String ISBN;
 
     public static void MenuLivro() {
