@@ -5,11 +5,16 @@ import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class MenuPrincipal {
+import com.github.biblioteca.interfaces.Menu;
+
+public class MenuPrincipal implements Menu {
     private static final Logger logger = LogManager.getLogger(MenuPrincipal.class);
     private static Scanner scanner = new Scanner(System.in);
+    private static UsuarioView usuarioView = new UsuarioView();
+    private static LivroView livroView = new LivroView();
 
-    public static void ExibirMenu() {
+    @Override
+    public void exibirMenu() {
         logger.info("Iniciando o sistema de biblioteca...");
         while (true) {
             System.out.println("\n------ MENU PRINCIPAL------");
@@ -20,8 +25,8 @@ public class MenuPrincipal {
             int op = scanner.nextInt();
 
             switch (op) {
-                case 1 -> UsuarioView.menuUsuario();
-                case 2 -> LivroView.MenuLivro();
+                case 1 -> usuarioView.exibirMenu();
+                case 2 -> livroView.exibirMenu();
                 case 0 -> {
                     System.out.println("Encerrando programa...");
                     scanner.close();

@@ -3,15 +3,18 @@ package com.github.biblioteca.view;
 import java.util.Scanner;
 
 import com.github.biblioteca.controllers.UsuarioController;
+import com.github.biblioteca.interfaces.Menu;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class UsuarioView {
+public class UsuarioView implements Menu {
     private static final Logger logger = LogManager.getLogger(UsuarioView.class);
     private static Scanner scanner = new Scanner(System.in);
     private static UsuarioController usuarioController = new UsuarioController();
 
-    public static void menuUsuario() {
+    @Override
+    public void exibirMenu() {
         logger.info("Menu do usuário iniciado.");
         while (true) {
             System.out.println("\n------ MENU USUARIO ------");

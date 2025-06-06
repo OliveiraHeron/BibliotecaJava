@@ -6,14 +6,16 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.github.biblioteca.controllers.LivroController;
+import com.github.biblioteca.interfaces.Menu;
 
-public class LivroView {
+public class LivroView implements Menu {
     private static final Logger logger = LogManager.getLogger(UsuarioView.class);
     private static Scanner scanner = new Scanner(System.in);
     private static LivroController livroController = new LivroController();
     private static String ISBN;
 
-    public static void MenuLivro() {
+    @Override
+    public void exibirMenu() {
         logger.info("Menu de livros iniciado.");
         while (true) {
             System.out.println("\n------ MENU LIVROS ------");
