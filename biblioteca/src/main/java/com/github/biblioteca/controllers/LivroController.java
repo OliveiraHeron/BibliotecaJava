@@ -27,10 +27,10 @@ public class LivroController {
         String titulo = scanner.nextLine();
         System.out.print("Autor: ");
         String autor = scanner.nextLine();
-        System.out.print("ISBN: ");
-        String isbn = scanner.nextLine();
+        System.out.print("ID: ");
+        String id = scanner.nextLine();
 
-        Livro livro = new Livro(titulo, autor, isbn);
+        Livro livro = new Livro(titulo, autor, id);
         livros.add(livro);
         salvarEmArquivo(livro);
         System.out.println("Livro adicionado!");
@@ -48,7 +48,7 @@ public class LivroController {
                     System.out.println("----------------------");
                     System.out.println("Título: " + dados[0]);
                     System.out.println("Autor: " + dados[1]);
-                    System.out.println("ISBN: " + dados[2]);
+                    System.out.println("ID: " + dados[2]);
                     System.out.println("----------------------");
                     encontrou = true;
                 }
@@ -61,7 +61,7 @@ public class LivroController {
         }
     }
 
-    public void removerLivro(String isbn) {
+    public void removerLivro(String id) {
         logger.info("Iniciando a remoção de um livro\n");
 
         List<String> linhasRestantes = new ArrayList<>();
@@ -69,7 +69,7 @@ public class LivroController {
             String linha;
             while ((linha = reader.readLine()) != null) {
                 String[] dados = linha.split(",");
-                if (dados.length == 3 && !dados[2].equals(isbn)) {
+                if (dados.length == 3 && !dados[2].equals(id)) {
                     linhasRestantes.add(linha);
                 }
             }
@@ -88,7 +88,7 @@ public class LivroController {
         System.out.println("Livro removido!");
     }
 
-    public void editarLivro(String isbn) {
+    public void editarLivro(String id) {
         logger.info("Iniciando a edição de um livro\n");
 
         boolean atualizado = false;
@@ -98,12 +98,12 @@ public class LivroController {
             String linha;
             while ((linha = reader.readLine()) != null) {
                 String[] dados = linha.split(",");
-                if (dados.length == 3 && dados[2].equals(isbn)) {
+                if (dados.length == 3 && dados[2].equals(id)) {
                     System.out.print("Novo título: ");
                     String novoTitulo = scanner.nextLine();
                     System.out.print("Novo autor: ");
                     String novoAutor = scanner.nextLine();
-                    linhasAtualizadas.add(novoTitulo + "," + novoAutor + "," + isbn);
+                    linhasAtualizadas.add(novoTitulo + "," + novoAutor + "," + id);
                     atualizado = true;
                 } else {
                     linhasAtualizadas.add(linha);
@@ -134,7 +134,7 @@ public class LivroController {
     private void salvarEmArquivo(Livro livro) {
         logger.info("Iniciando a abertura do arquivo\n");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true))) {
-            writer.write(livro.getTitulo() + "," + livro.getAutor() + "," + livro.getIsbn());
+            writer.write(livro.getTitulo() + "," + livro.getAutor() + "," + livro.getId());
             writer.newLine();
             System.out.println("Livro salvo no arquivo!");
         } catch (IOException e) {

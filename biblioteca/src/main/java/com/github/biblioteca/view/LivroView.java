@@ -36,13 +36,13 @@ public class LivroView implements Menu {
                     break;
                 case 3:
                     System.out.print("Digite o ID do livro a ser editado: ");
-                    String isbnEditar = scanner.nextLine();
-                    livroController.editarLivro(isbnEditar);
+                    String idEditar = scanner.nextLine();
+                    livroController.editarLivro(idEditar);
                     break;
                 case 4:
                     System.out.print("Digite o ID do livro a ser excluido: ");
-                    String isbnExcluir = scanner.nextLine();
-                    livroController.removerLivro(isbnExcluir);
+                    String idExcluir = scanner.nextLine();
+                    livroController.removerLivro(idExcluir);
                     break;
                 case 0:
                     logger.info("Voltando ao menu principal.");

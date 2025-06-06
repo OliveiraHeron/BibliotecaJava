@@ -1,14 +1,16 @@
 package com.github.biblioteca.models;
 
+import com.github.biblioteca.interfaces.Gerenciavel;
+
 public class Livro implements Gerenciavel {
     private String titulo;
     private String autor;
-    private String isbn;
+    private String id;
 
-    public Livro(String titulo, String autor, String isbn) {
+    public Livro(String titulo, String autor, String id) {
         this.titulo = titulo;
         this.autor = autor;
-        this.isbn = isbn;
+        this.id = id;
     }
 
     public String getTitulo() { return titulo; }
@@ -17,11 +19,11 @@ public class Livro implements Gerenciavel {
     public String getAutor() { return autor; }
     public void setAutor(String autor) { this.autor = autor; }
 
-    public String getIsbn() { return isbn; }
-    public void setIsbn(String isbn) { this.isbn = isbn; }
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
 
     @Override
     public void exibirInformacoes() {
-        System.out.println("Livro: " + titulo + ", Autor: " + autor + ", ISBN: " + isbn);
+        System.out.println("Livro: " + titulo + ", Autor: " + autor + ", id: " + id);
     }
 }

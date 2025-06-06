@@ -1,5 +1,6 @@
 package com.github.biblioteca.models;
 
+import com.github.biblioteca.interfaces.Gerenciavel;
 
 public abstract class Pessoa implements Gerenciavel {
     protected String nome;

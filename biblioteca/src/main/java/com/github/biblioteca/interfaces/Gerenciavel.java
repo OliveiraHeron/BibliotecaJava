@@ -1,4 +1,4 @@
-package com.github.biblioteca.models;
+package com.github.biblioteca.interfaces;
 
 public interface Gerenciavel {
     void exibirInformacoes();
