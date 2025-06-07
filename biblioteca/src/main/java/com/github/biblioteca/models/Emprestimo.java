@@ -2,7 +2,9 @@ package com.github.biblioteca.models;
 
 import java.time.LocalDate;
 
-public class Emprestimo {
+import com.github.biblioteca.interfaces.Gerenciavel;
+
+public class Emprestimo implements Gerenciavel {
     private Usuario usuario;
     private Livro livro;
     private LocalDate dataEmprestimo;
@@ -15,6 +17,7 @@ public class Emprestimo {
         this.dataDevolucao = dataEmprestimo.plusDays(7);
     }
 
+    @Override
     public void exibirInformacoes() {
         System.out.println("Usuario: " + usuario.getNome() +
                 " | Livro: " + livro.getTitulo() +

@@ -13,6 +13,6 @@ public class Usuario extends Pessoa {
 
     @Override
     public void exibirInformacoes() {
-        System.out.println("Usuário: " + nome + ", CPF: " + cpf + ", Idade: " + idade + ", Matrícula: " + matricula);
+        System.out.println("Usuario: " + nome + ", CPF: " + cpf + ", Idade: " + idade + ", Matricula: " + matricula);
     }
 }

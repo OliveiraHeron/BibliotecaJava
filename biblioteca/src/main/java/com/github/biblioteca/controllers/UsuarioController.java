@@ -21,7 +21,7 @@ public class UsuarioController {
     private String fileName = "usuarios.txt";
 
     public void adicionarUsuario() {
-        logger.info("Iniciando a adição de um novo usuário\n");
+        logger.info("Iniciando a adicao de um novo usuario\n");
 
         System.out.print("Nome: ");
         String nome = scanner.nextLine();
@@ -30,17 +30,17 @@ public class UsuarioController {
         System.out.print("Idade: ");
         int idade = scanner.nextInt();
         scanner.nextLine();
-        System.out.print("Matrícula: ");
+        System.out.print("Matricula: ");
         String matricula = scanner.nextLine();
 
         Usuario usuario = new Usuario(nome, cpf, idade, matricula);
         usuarios.add(usuario);
         salvarEmArquivo(usuario);
-        System.out.println("Usuário adicionado!");
+        System.out.println("Usuario adicionado!");
     }
 
     public void listarUsuarios() {
-        logger.info("Iniciando a listagem de usuários\n");
+        logger.info("Iniciando a listagem de usuarios\n");
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String linha;
@@ -52,13 +52,13 @@ public class UsuarioController {
                     System.out.println("Nome: " + dados[0]);
                     System.out.println("CPF: " + dados[1]);
                     System.out.println("Idade: " + dados[2]);
-                    System.out.println("Matrícula: " + dados[3]);
+                    System.out.println("Matricula: " + dados[3]);
                     System.out.println("----------------------");
                     encontrou = true;
                 }
             }
             if (!encontrou) {
-                System.out.println("Nenhum usuário encontrado no arquivo.");
+                System.out.println("Nenhum usuario encontrado no arquivo.");
             }
         } catch (IOException e) {
             logger.error("Erro ao ler o arquivo: " + e.getMessage());
@@ -66,7 +66,7 @@ public class UsuarioController {
     }
 
     public void removerUsuario(String cpf) {
-        logger.info("Iniciando a remoção de um usuário\n");
+        logger.info("Iniciando a remocao de um usuario\n");
 
         List<String> linhasRestantes = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
@@ -89,11 +89,11 @@ public class UsuarioController {
         } catch (IOException e) {
             logger.error("Erro ao escrever no arquivo: " + e.getMessage());
         }
-        System.out.println("Usuário removido!");
+        System.out.println("Usuario removido!");
     }
 
     public void editarUsuario(String cpf) {
-        logger.info("Iniciando a edição de um usuário\n");
+        logger.info("Iniciando a edicao de um usuario\n");
 
         boolean atualizado = false;
         List<String> linhasAtualizadas = new ArrayList<>();
@@ -129,9 +129,9 @@ public class UsuarioController {
         }
 
         if (atualizado) {
-            System.out.println("Usuário atualizado!");
+            System.out.println("Usuario atualizado!");
         } else {
-            System.out.println("Usuário não encontrado.");
+            System.out.println("Usuario não encontrado.");
         }
     }
 
